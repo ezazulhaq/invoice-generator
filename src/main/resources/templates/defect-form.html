@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<script type="text/javascript">
+    $(".date").datepicker({
+        format: "dd-mm-yyyy",
+    });
+</script>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <br>
+        <form th:action="@{/saveDefect}" th:object="${defect}" method="POST">
+            <input type="hidden" th:value="${defect.id}" name="id" />
+
+            <div class="col alert alert-warning" th:if="${#fields.hasErrors('bugId')}" th:errors="*{bugId}"></div>            
+            <div class="col alert alert-warning"
+                th:if="${#fields.hasErrors('assignedTo')}" th:errors="*{assignedTo}"></div>
+            <div class="col alert alert-warning"
+                th:if="${#fields.hasErrors('project')}" th:errors="*{project}"></div>
+            <div class="col alert alert-warning"
+                th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></div>
+            <!-- <div class="col alert alert-warning"
+                th:if="${#fields.hasErrors('eta')}" th:errors="*{eta}"></div> -->
+
+            <div class="form-group row">
+                <label for="bugId" class="form-control-label col-sm-2">Defect ID</label>
+                <div class="col" sec:authorize="hasRole('MANAGER')">
+                    <input type="number" th:field="*{bugId}" id="bugId" class="form-control" />
+                </div>
+                <div class="col" sec:authorize="hasRole('LIMITED')">
+                    <input type="number" th:field="*{bugId}" id="bugId" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="form-control-label col-sm-2">Defect Description</label>
+                <div class="col" sec:authorize="hasRole('MANAGER')">
+                    <textarea rows="5" cols="25" th:field="*{description}" id="description"
+                        class="form-control"></textarea>
+                </div>
+                <div class="col" sec:authorize="hasRole('LIMITED')">
+                    <textarea rows="5" cols="25" th:field="*{description}" id="description" class="form-control"
+                        readonly></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="assignedTo" class="form-control-label col-sm-2">Assigned To</label>
+                <div class="col" sec:authorize="hasRole('MANAGER')">
+                    <select th:field="*{assignedTo}" class="form-control" >
+                        <option value="">Select</option>
+                        <option th:each="a : ${assignedToList}" th:value="${a}" th:text="${a}" />
+                    </select>
+                </div>
+                <div class="col" sec:authorize="hasRole('LIMITED')">
+                    <select th:field="*{assignedTo}" class="form-control" >
+                        <option th:value="*{assignedTo}" th:text="*{assignedTo}" />
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="project" class="form-control-label col-sm-2">Project</label>
+                <div class="col" sec:authorize="hasRole('MANAGER')">
+                    <select th:field="*{project}" class="form-control">
+                        <option value="">Select</option>
+                        <option th:each="p : ${projectList}" th:value="${p}" th:text="${p}" />
+                    </select>
+                </div>
+                <div class="col" sec:authorize="hasRole('LIMITED')">
+                    <select th:field="*{project}" class="form-control">
+                        <option th:value="*{project}" th:text="*{project}" />
+                    </select>
+                </div>
+            </div>
+
+            <!-- <div class="form-group row">
+                <label for="eta" class="form-control-label col-sm-2">ETA</label>
+                <div class="col" sec:authorize="hasRole('MANAGER')"> -->
+                    <!-- <input type="date" th:field="*{eta}" id="eta" class="form-control" /> -->
+                   <!--  <input type="date" class="date form-control" th:field="*{eta}" />
+                </div>
+            </div> -->
+
+            <div class="form-group row">
+                <label for="status" class="form-control-label col-sm-2">Status</label>
+                <div class="col">
+                    <select th:field="*{status}" class="form-control">
+                        <option value="">Select</option>
+                        <option th:each="s : ${statusList}" th:value="${s}" th:text="${s}" />
+                    </select>
+                </div>
+            </div>
+
+            <!-- <div class="form-group row">
+                <label for="remarks" class="form-control-label col-sm-2">Remarks</label>
+                <div class="col">
+                    <textarea rows="5" cols="25" th:field="*{remarks}" id="remarks"
+                        class="form-control"></textarea>
+                </div>
+            </div> -->
+                        
+            <input type="submit" value="Save" class="btn btn-success" />
+        </form>
+
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+    
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <h2>Access Denied</h2>
+        <p>You are not authorized to access this content</p>
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+</body>
+
+</html>

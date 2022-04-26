@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <h2 class="my-3">Dashboard</h2>
+
+        <form th:action="@{/search/searchId}" method="get">
+            <div class="input-group my-3" style="width: 250px;">
+                <input type="text" th:name="search" class="form-control mr-1" placeholder="Search With Invoice ID">
+                <button type="submit" class="btn btn-secondary bi bi-search"></button>
+            </div>
+        </form>
+
+        <!-- <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <th class="col col-sm-2">
+                    Defect ID
+                    <a th:href="@{/search/sortByDefectId}" class="btn btn-secondary btn-sm">
+                        <span class="bi bi-caret-down-fill"></span>
+                    </a>
+                </th>
+                <th>Description</th>
+                <th class="col col-sm-2">
+                    Assigned To
+                    <a sec:authorize="hasRole('MANAGER')" th:href="@{/search/sortByAssignedTo}"
+                        class="btn btn-secondary btn-sm">
+                        <span class="bi bi-caret-down-fill"></span>
+                    </a>
+                </th>
+                <th class="col col-sm-2">
+                    Project
+                    <a th:href="@{/search/sortByProject}" class="btn btn-secondary btn-sm">
+                        <span class="bi bi-caret-down-fill"></span>
+                    </a>
+                </th>
+                <th class="col col-sm-2">
+                    Status
+                    <a th:href="@{/search/sortByStatus}" class="btn btn-secondary btn-sm">
+                        <span class="bi bi-caret-down-fill"></span>
+                    </a>
+                </th>
+                <th class="col-2">Action</th>
+            </thead>
+            <tbody>
+                <tr th:each="tempDefect : ${defectList}">
+                    <td th:text="${tempDefect.bugId}" />
+                    <td th:text="${tempDefect.description}" />
+                    <td th:text="${tempDefect.assignedTo}" />
+                    <td th:text="${tempDefect.project}" />
+                    <td th:text="${tempDefect.status}" />
+                    <td>
+                        <a th:href="@{/updateDefect/{id}(id=${tempDefect.id})}" class="btn btn-success">Update</a>
+                        <a sec:authorize="hasRole('MANAGER')" th:href="@{/removeDefect/{id}(id=${tempDefect.id})}"
+                            class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+</body>
+
+</html>
