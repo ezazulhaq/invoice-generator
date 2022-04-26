@@ -1,0 +1,30 @@
+# Use root/mysql as user/password credentials
+version: "3.1"
+services:
+  db:
+    container_name: invoice_db
+    image: mysql:5.7.34
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: hbinvoice
+      MYSQL_PASSWORD: hbinvoice
+      MYSQL_DATABASE: hb_invoice_db
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3394:3306
+    volumes:
+      - mysql-invoice-mvc:/var/lib/mysql
+
+  adminer:
+    container_name: invoice_db_admin
+    depends_on:
+      - db
+    image: adminer
+    restart: always
+    ports:
+      - 8114:8080
+
+volumes:
+  mysql-invoice-mvc:
