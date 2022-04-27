@@ -2,49 +2,41 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="menu">
     <!-- Container wrapper -->
     <div class="container-fluid">
+
+        <!-- Brand/logo -->
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}" alt="HAA Enterprises Logo" height="50px" loading="lazy">
+        </a>
+
         <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="fas fa-bars"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_Navbar">
+            <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                <img th:src="@{/images/logo.png}" height="50" alt="Invoice Generator Logo" loading="lazy" />
-            </a>
+        <div class="collapse navbar-collapse" id="collapse_Navbar">
             <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Home</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class=" nav-item">
+                    <a class="nav-link active" th:href="@{/}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/customer/dashboard}">Customer Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <div sec:authorize="hasRole('MANAGER')">
-                        <a class="nav-link" th:href="@{/customer/showFormForAdd}">Add Customer</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Customer Services
+                    </a>
+
+                    <div class="dropdown-menu bg-light">
+                        <a class="dropdown-item" th:href="@{/customer/dashboard}">Customer Dashboard</a>
+                        <a class="dropdown-item" th:href="@{/customer/showFormForAdd}">Add Customer</a>
                     </div>
                 </li>
             </ul>
             <!-- Left links -->
+            <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+                <button class="btn btn-danger" type="submit">Logout</button>
+            </form>
         </div>
         <!-- Collapsible wrapper -->
-
-        <!-- Right elements -->
-        <div class="d-flex align-items-center">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="btn btn-danger" value="Logout">
-                    </form>
-                </li>
-            </ul>
-
-        </div>
-        <!-- Right elements -->
     </div>
     <!-- Container wrapper -->
 </nav>
