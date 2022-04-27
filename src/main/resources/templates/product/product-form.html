@@ -41,11 +41,8 @@
 
             <div class="form-group row">
                 <label for="rate" class="form-control-label col-sm-2">Rate</label>
-                <div class="col" sec:authorize="hasRole('MANAGER')">
+                <div class="col">
                     <input type="number" th:field="*{rate}" id="rate" class="form-control" />
-                </div>
-                <div class="col" sec:authorize="hasRole('LIMITED')">
-                    <input type="number" th:field="*{rate}" id="rate" class="form-control" readonly />
                 </div>
             </div>
             <div class="col alert alert-warning"
