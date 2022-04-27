@@ -37,8 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/").hasRole("EMPLOYEE")// saveDefect
                 .antMatchers("/search/**").hasRole("EMPLOYEE")
-                .antMatchers("/updateDefect/**").hasRole("EMPLOYEE")
-                .antMatchers("/saveDefect").hasRole("EMPLOYEE")
+                .antMatchers("/update/**").hasRole("EMPLOYEE")
+                .antMatchers("/save").hasRole("EMPLOYEE")
                 .antMatchers("/**").hasRole("MANAGER")
                 .and()
                 .formLogin()

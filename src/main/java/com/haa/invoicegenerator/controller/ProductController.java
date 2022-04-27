@@ -48,7 +48,7 @@ public class ProductController {
         return "product/product-form";
     }
 
-    @PostMapping("/saveProduct")
+    @PostMapping("/save")
     public String saveProduct(@ModelAttribute("product") @Valid ProductDetails product, Errors errors,
             Model theModel) {
 

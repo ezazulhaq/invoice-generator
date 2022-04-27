@@ -48,7 +48,7 @@ public class CustomerController {
         return "customer/customer-form";
     }
 
-    @PostMapping("/saveCustomer")
+    @PostMapping("/save")
     public String saveDefect(@ModelAttribute("customer") @Valid CustomerDetails customer, Errors errors,
             Model theModel) {
 
