@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <br>
+        <form th:action="@{/product/saveProduct}" th:object="${product}" method="POST">
+            <input type="hidden" th:value="${product.id}" name="id" />
+
+            <div class="form-group row">
+                <label for="particulars" class="form-control-label col-sm-2">Particulars</label>
+                <div class="col" sec:authorize="hasRole('MANAGER')">
+                    <input type="text" th:field="*{particulars}" id="particulars" class="form-control" />
+                </div>
+                <div class="col" sec:authorize="hasRole('LIMITED')">
+                    <input type="text" th:field="*{particulars}" id="particulars" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="col alert alert-warning" th:if="${#fields.hasErrors('particulars')}" th:errors="*{particulars}"></div>
+
+            <div class="form-group row">
+                <label for="hsnCode" class="form-control-label col-sm-2">HSN Code</label>
+                <div class="col" sec:authorize="hasRole('MANAGER')">
+                    <select th:field="*{hsnCode}" class="form-control">
+                        <option value="">Select</option>
+                        <option th:each="a : ${hsnCodeList}" th:value="${a}" th:text="${a}" />
+                    </select>
+                </div>
+                <div class="col" sec:authorize="hasRole('LIMITED')">
+                    <select th:field="*{hsnCode}" class="form-control">
+                        <option th:value="*{hsnCode}" th:text="*{hsnCode}" />
+                    </select>
+                </div>
+            </div>
+            <div class="col alert alert-warning"
+                th:if="${#fields.hasErrors('particulars')}" th:errors="*{particulars}"></div>
+
+            <div class="form-group row">
+                <label for="rate" class="form-control-label col-sm-2">Rate</label>
+                <div class="col" sec:authorize="hasRole('MANAGER')">
+                    <input type="number" th:field="*{rate}" id="rate" class="form-control" />
+                </div>
+                <div class="col" sec:authorize="hasRole('LIMITED')">
+                    <input type="number" th:field="*{rate}" id="rate" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="col alert alert-warning"
+                th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}"></div>
+
+            <div class="my-3">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+    
+</body>
+
+</html>

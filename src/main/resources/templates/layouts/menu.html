@@ -30,6 +30,16 @@
                         <a class="dropdown-item" th:href="@{/customer/showFormForAdd}">Add Customer</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Product Services
+                    </a>
+
+                    <div class="dropdown-menu bg-light">
+                        <a class="dropdown-item" th:href="@{/product/dashboard}">Product Dashboard</a>
+                        <a class="dropdown-item" th:href="@{/product/showFormForAdd}">Add Product</a>
+                    </div>
+                </li>
             </ul>
             <!-- Left links -->
             <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
