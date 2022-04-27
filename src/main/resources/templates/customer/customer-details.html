@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <h2 class="my-3">Customer Dashboard</h2>
+
+        <form th:action="@{/customer/search/searchId}" method="get">
+            <div class="input-group my-3" style="width: 250px;">
+                <input type="text" th:name="search" class="form-control mr-1" placeholder="Search With GST No">
+                <button type="submit" class="btn btn-secondary bi bi-search"></button>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <th>GST No</th>
+                <th>Name</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr th:each="tempCustomer : ${customerList}">
+                    <td th:text="${tempCustomer.gstNo}" />
+                    <td th:text="${tempCustomer.customerName}" />
+                    <td>
+                        <a th:href="@{/customer/update/{id}(id=${tempCustomer.gstNo})}"
+                            class="btn btn-success">Update</a>
+                        <a sec:authorize="hasRole('MANAGER')"
+                            th:href="@{/customer/remove/{id}(id=${tempCustomer.gstNo})}"
+                            class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+</body>
+
+</html>
