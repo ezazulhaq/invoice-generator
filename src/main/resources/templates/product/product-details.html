@@ -20,12 +20,14 @@
             <thead class="thead-dark">
                 <th>HSN Code</th>
                 <th>Particulars</th>
+                <th>Rate</th>
                 <th>Action</th>
             </thead>
             <tbody>
                 <tr th:each="tempProduct : ${productList}">
                     <td th:text="${tempProduct.hsnCode}" />
                     <td th:text="${tempProduct.particulars}" />
+                    <td th:text="${tempProduct.rate}" />
                     <td>
                         <a th:href="@{/product/update/{id}(id=${tempProduct.id})}" class="btn btn-success">Update</a>
                         <a sec:authorize="hasRole('MANAGER')" th:href="@{/product/remove/{id}(id=${tempProduct.id})}"
