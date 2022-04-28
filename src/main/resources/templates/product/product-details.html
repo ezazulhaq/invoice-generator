@@ -38,9 +38,10 @@
                     <td th:text="${tempProduct.particulars}" />
                     <td th:text="${tempProduct.rate}" />
                     <td>
-                        <a th:href="@{/product/update/{id}(id=${tempProduct.id})}" class="btn btn-success">Update</a>
+                        <a th:href="@{/product/update/{id}(id=${tempProduct.id})}"
+                            class="btn btn-success bi bi-pencil-square"></a>
                         <a sec:authorize="hasRole('MANAGER')" th:href="@{/product/remove/{id}(id=${tempProduct.id})}"
-                            class="btn btn-danger">Remove</a>
+                            class="btn btn-danger bi bi-trash"></a>
                     </td>
                 </tr>
             </tbody>

@@ -40,10 +40,10 @@
                     <td th:text="${tempCustomer.customerName}" />
                     <td>
                         <a th:href="@{/customer/update/{id}(id=${tempCustomer.gstNo})}"
-                            class="btn btn-success">Update</a>
+                            class="btn btn-success bi bi-pencil-square"></a>
                         <a sec:authorize="hasRole('MANAGER')"
                             th:href="@{/customer/remove/{id}(id=${tempCustomer.gstNo})}"
-                            class="btn btn-danger">Remove</a>
+                            class="btn btn-danger bi bi-trash"></a>
                     </td>
                 </tr>
             </tbody>
