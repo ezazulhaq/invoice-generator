@@ -9,12 +9,21 @@
     <div class="container">
         <h2 class="my-3">Product Dashboard</h2>
 
-        <form th:action="@{/product/search/searchId}" method="get">
-            <div class="input-group my-3" style="width: 250px;">
-                <input type="text" th:name="search" class="form-control mr-1" placeholder="Search With Product">
-                <button type="submit" class="btn btn-secondary bi bi-search"></button>
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/product/search/searchId}" method="get">
+                    <div class="input-group my-3" style="width: 250px;">
+                        <input type="text" th:name="search" class="form-control mr-1" placeholder="Search Items">
+                        <button type="submit" class="btn btn-secondary bi bi-search"></button>
+                    </div>
+                </form>
             </div>
-        </form>
+            <div class="col-12 col-sm-auto">
+                <div class="my-3">
+                    <a class="btn btn-primary" th:href="@{/product/showFormForAdd}">Add Product</a>
+                </div>
+            </div>
+        </div>
 
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">

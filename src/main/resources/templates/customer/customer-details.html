@@ -9,12 +9,24 @@
     <div class="container">
         <h2 class="my-3">Customer Dashboard</h2>
 
-        <form th:action="@{/customer/search/searchId}" method="get">
-            <div class="input-group my-3" style="width: 250px;">
-                <input type="text" th:name="search" class="form-control mr-1" placeholder="Search With GST No">
-                <button type="submit" class="btn btn-secondary bi bi-search"></button>
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/customer/search/searchId}" method="get">
+                    <div class="input-group my-3" style="width: 250px;">
+                        <input type="text" th:name="search" class="form-control mr-1" placeholder="Search With GST No">
+                        <button type="submit" class="btn btn-secondary bi bi-search"></button>
+                    </div>
+                </form>
             </div>
-        </form>
+            <div class="col-12 col-sm-auto">
+                <div class="my-3">
+                    <a class="btn btn-primary" th:href="@{/customer/showFormForAdd}">Add Customer</a>
+                </div>
+            </div>
+        </div>
+
+
+
 
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
