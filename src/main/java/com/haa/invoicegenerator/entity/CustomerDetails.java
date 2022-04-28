@@ -1,7 +1,11 @@
 package com.haa.invoicegenerator.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -29,6 +33,10 @@ public class CustomerDetails {
     @NotNull(message = "Please enter Pin Code")
     @NumberFormat(pattern = "/^[0-9]+$/")
     private Long pinCode;
+
+    @OneToMany(mappedBy = "customer", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH })
+    private List<InvoiceDetails> invoice;
 
     public CustomerDetails() {
     }
@@ -91,10 +99,19 @@ public class CustomerDetails {
         this.pinCode = pinCode;
     }
 
+    public List<InvoiceDetails> getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(List<InvoiceDetails> invoice) {
+        this.invoice = invoice;
+    }
+
     @Override
     public String toString() {
         return "CustomerDetails [address=" + address + ", customerName=" + customerName + ", gstNo=" + gstNo
-                + ", phoneNumber=" + phoneNumber + ", pinCode=" + pinCode + ", state=" + state + "]";
+                + ", invoice=" + invoice + ", phoneNumber=" + phoneNumber + ", pinCode=" + pinCode + ", state=" + state
+                + "]";
     }
 
 }

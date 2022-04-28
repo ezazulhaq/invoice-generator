@@ -24,14 +24,14 @@ public class ProductDetails {
 
     @NotNull(message = "Please enter Rate")
     @NumberFormat(style = NumberFormat.Style.CURRENCY)
-    private Long rate;
+    private Double rate;
 
     public ProductDetails() {
     }
 
     public ProductDetails(Integer id, @NotEmpty(message = "Please enter Product Name") String particulars,
             @NotNull(message = "Please select HSN Code") Integer hsnCode,
-            @NotNull(message = "Please enter Rate") Long rate) {
+            @NotNull(message = "Please enter Rate") Double rate) {
         this.id = id;
         this.particulars = particulars;
         this.hsnCode = hsnCode;
@@ -62,11 +62,11 @@ public class ProductDetails {
         this.hsnCode = hsnCode;
     }
 
-    public Long getRate() {
+    public Double getRate() {
         return rate;
     }
 
-    public void setRate(Long rate) {
+    public void setRate(Double rate) {
         this.rate = rate;
     }
 
