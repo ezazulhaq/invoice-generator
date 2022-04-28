@@ -87,7 +87,9 @@ public class ProductController {
     }
 
     private List<String> hsnCodeList(List<String> hList) {
-
+        hList.add("4004");
+        hList.add("4005");
+        hList.add("4006");
         hList.add("4008");
 
         return hList;
