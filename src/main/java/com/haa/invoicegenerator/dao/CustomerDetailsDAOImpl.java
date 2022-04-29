@@ -3,6 +3,8 @@ package com.haa.invoicegenerator.dao;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import com.haa.invoicegenerator.entity.CustomerDetails;
 import com.haa.invoicegenerator.repo.CustomerDetailsRepository;
 
@@ -21,11 +23,13 @@ public class CustomerDetailsDAOImpl implements CustomerDetailsDAO {
     }
 
     @Override
+    @Transactional
     public void saveCustomer(CustomerDetails customer) {
         customerRepo.save(customer);
     }
 
     @Override
+    @Transactional
     public void removeCustomer(String gstNo) {
         customerRepo.deleteById(gstNo);
     }

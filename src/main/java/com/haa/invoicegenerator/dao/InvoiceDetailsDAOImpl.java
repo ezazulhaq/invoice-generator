@@ -3,6 +3,8 @@ package com.haa.invoicegenerator.dao;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import com.haa.invoicegenerator.entity.InvoiceDetails;
 import com.haa.invoicegenerator.repo.InvoiceDetailsRepository;
 
@@ -21,11 +23,13 @@ public class InvoiceDetailsDAOImpl implements InvoiceDetailsDAO {
     }
 
     @Override
+    @Transactional
     public void saveInvoice(InvoiceDetails invoice) {
         invoiceRepo.save(invoice);
     }
 
     @Override
+    @Transactional
     public void removeInvoice(Integer invoiceId) {
         invoiceRepo.deleteById(invoiceId);
     }
