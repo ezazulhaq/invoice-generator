@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <br>
+        <form th:action="@{/invoice/save}" th:object="${invoice}" method="POST">
+
+            <div class="form-group row">
+                <label for="invoiceId" class="form-control-label col-sm-2">Invoice No</label>
+                <div class="col">
+                    <input type="number" th:field="*{invoiceId}" id="invoiceId" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="gstNo" class="form-control-label col-sm-2">GST No</label>
+                <div class="col">
+                    <input type="text" th:field="*{customer.gstNo}" id="gstNo" class="form-control" readonly />
+                </div>
+                <div class="col">
+                    <a class="btn btn-primary" th:href="@{/invoice/gstNo/{id}(id=*{invoiceId})}">GET</a>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label for="customerName" class="form-control-label col-sm-2">Customer Name</label>
+                <div class="col">
+                    <input type="text" th:field="*{customer.customerName}" id="customerName" class="form-control"
+                        readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="cgst" class="form-control-label col-sm-2">CGST %</label>
+                <div class="col">
+                    <input type="number" th:field="*{cgst}" id="cgst" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="sgst" class="form-control-label col-sm-2">SGST %</label>
+                <div class="col">
+                    <input type="number" th:field="*{sgst}" id="sgst" class="form-control" />
+                </div>
+            </div>
+
+            <div class="my-3">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+
+</body>
+
+</html>

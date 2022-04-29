@@ -9,12 +9,21 @@
     <div class="container">
         <h2 class="my-3">Dashboard</h2>
 
-        <form th:action="@{/invoice/search/searchId}" method="get">
-            <div class="input-group my-3" style="width: 250px;">
-                <input type="text" th:name="search" class="form-control mr-1" placeholder="Search With Invoice ID">
-                <button type="submit" class="btn btn-secondary bi bi-search"></button>
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/invoice/search/searchId}" method="get">
+                    <div class="input-group my-3" style="width: 250px;">
+                        <input type="text" th:name="search" class="form-control mr-1" placeholder="Search Details">
+                        <button type="submit" class="btn btn-secondary bi bi-search"></button>
+                    </div>
+                </form>
             </div>
-        </form>
+            <div class="col-12 col-sm-auto">
+                <div class="my-3">
+                    <a class="btn btn-secondary" th:href="@{/invoice/generate}">Generate Invoice</a>
+                </div>
+            </div>
+        </div>
 
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
@@ -36,8 +45,8 @@
             <tbody>
                 <tr th:each="tempInvoice : ${invoiceList}">
                     <td th:text="${tempInvoice.invoiceId}" />
-                    <td th:text="${tempInvoice.customer.gstNo}" />
-                    <td th:text="${tempInvoice.customer.customerName}" />
+                    <td th:text="${tempInvoice.customer}" />
+                    <td th:text="${tempInvoice.customer}" />
                     <td th:text="${tempInvoice.grandTotal}" />
                     <td th:text="${tempInvoice.invoiceDate}" />
                     <td>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <h3 class="my-3">Customer Search</h3>
+
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/customer/search/searchId}" method="get">
+                    <div class="input-group my-3" style="width: 250px;">
+                        <input type="text" th:name="search" class="form-control mr-1" placeholder="Search With GST No">
+                        <button type="submit" class="btn btn-secondary bi bi-search"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <th>GST No</th>
+                <th>Name</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr th:each="tempCustomer : ${customerList}">
+                    <td th:text="${tempCustomer.gstNo}" />
+                    <td th:text="${tempCustomer.customerName}" />
+                    <td>
+                        <form
+                            th:action="@{/invoice/select/{id}/{invoiceId}(id=${tempCustomer.gstNo}, invoiceId=${invoiceId})}"
+                            method="post">
+                            <input type="hidden" th:value="${invoiceId}" name="invoiceId" />
+                            <button type="submit" class="btn btn-success bi bi-check2-square"></button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+</body>
+
+</html>

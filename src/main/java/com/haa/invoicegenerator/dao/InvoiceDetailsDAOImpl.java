@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.haa.invoicegenerator.entity.GoodDetails;
 import com.haa.invoicegenerator.entity.InvoiceDetails;
+import com.haa.invoicegenerator.repo.GoodDetailsRepository;
 import com.haa.invoicegenerator.repo.InvoiceDetailsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class InvoiceDetailsDAOImpl implements InvoiceDetailsDAO {
 
     @Autowired
     private InvoiceDetailsRepository invoiceRepo;
+
+    @Autowired
+    private GoodDetailsRepository goodRepo;
 
     @Override
     public List<InvoiceDetails> getAllInvoice() {
@@ -37,6 +42,11 @@ public class InvoiceDetailsDAOImpl implements InvoiceDetailsDAO {
     @Override
     public Optional<InvoiceDetails> fetchInvoiceById(Integer invoiceId) {
         return invoiceRepo.findById(invoiceId);
+    }
+
+    @Override
+    public List<GoodDetails> getGoodsListByInvoice(Integer invoiceId) {
+        return goodRepo.findByGoodDetailsInvoiceId(invoiceId);
     }
 
 }

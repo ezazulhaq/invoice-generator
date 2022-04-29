@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.haa.invoicegenerator.dao.InvoiceDetailsDAO;
+import com.haa.invoicegenerator.entity.GoodDetails;
 import com.haa.invoicegenerator.entity.InvoiceDetails;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     @Override
     public Optional<InvoiceDetails> fetchInvoiceById(Integer invoiceId) {
         return invoiceDAO.fetchInvoiceById(invoiceId);
+    }
+
+    @Override
+    public List<GoodDetails> getGoodsListByInvoice(Integer invoiceId) {
+        return invoiceDAO.getGoodsListByInvoice(invoiceId);
     }
 
 }
