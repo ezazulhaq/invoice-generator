@@ -1,10 +1,15 @@
 package com.haa.invoicegenerator.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.haa.invoicegenerator.entity.CustomerDetails;
@@ -14,8 +19,10 @@ import com.haa.invoicegenerator.entity.ProductDetails;
 import com.haa.invoicegenerator.pojo.Goods;
 import com.haa.invoicegenerator.service.CustomerDetailsService;
 import com.haa.invoicegenerator.service.InvoiceDetailsService;
+import com.haa.invoicegenerator.service.PdfService;
 import com.haa.invoicegenerator.service.ProductDetailsService;
 import com.haa.invoicegenerator.util.NumberToWords;
+import com.lowagie.text.DocumentException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +46,9 @@ public class InvoiceController {
 
     @Autowired
     private ProductDetailsService productService;
+
+    @Autowired
+    private PdfService pdfService;
 
     @GetMapping("/generate")
     public String showFormForAdd(Model theModel) {
@@ -188,6 +198,22 @@ public class InvoiceController {
         }
 
         return "redirect:/invoice/update/" + goodData.getInvoice().getInvoiceId();
+    }
+
+    @GetMapping(value = "/download-pdf/{id}")
+    public void downloadPDFResource(@PathVariable("id") String invoiceId, HttpServletResponse response) {
+        try {
+            Path file = Paths.get(pdfService.generateInvoicePdf(Integer.parseInt(invoiceId)).getAbsolutePath());
+            if (Files.exists(file)) {
+                response.setContentType("application/pdf");
+                response.addHeader("Content-Disposition",
+                        "attachment; filename=" + file.getFileName());
+                Files.copy(file, response.getOutputStream());
+                response.getOutputStream().flush();
+            }
+        } catch (DocumentException | IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
