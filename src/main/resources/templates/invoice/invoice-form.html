@@ -94,6 +94,8 @@
                 <input type="submit" value="Save" class="btn btn-success" />
                 <a class="btn btn-primary" th:href="@{/invoice/addgood/{id}(id=*{invoiceId})}">Add Goods</a>
                 <a class="btn btn-danger" onclick="calculateGrandTotal();">Calculate</a>
+                <a class="btn btn-secondary" th:href="@{/invoice/download-pdf/{id}(id=*{invoiceId})}">Download</a>
+
             </div>
         </form>
 
