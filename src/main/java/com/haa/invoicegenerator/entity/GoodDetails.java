@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class GoodDetails {
@@ -20,7 +19,8 @@ public class GoodDetails {
     @JoinColumn
     private InvoiceDetails invoice;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private ProductDetails product;
 
     private Integer kgs;

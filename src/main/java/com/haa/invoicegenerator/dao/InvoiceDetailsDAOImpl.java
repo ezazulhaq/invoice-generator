@@ -45,8 +45,33 @@ public class InvoiceDetailsDAOImpl implements InvoiceDetailsDAO {
     }
 
     @Override
-    public List<GoodDetails> getGoodsListByInvoice(Integer invoiceId) {
+    public List<String> getGoodsListByInvoice(Integer invoiceId) {
         return goodRepo.findByGoodDetailsInvoiceId(invoiceId);
+    }
+
+    @Override
+    public Optional<GoodDetails> fetchGoodByIdAndInvoice(Integer id, Integer invoiceId) {
+        return goodRepo.findByGoodDetailsByIdAndInvoiceId(id, invoiceId);
+    }
+
+    @Override
+    @Transactional
+    public GoodDetails addGoodDetails(Integer invoiceId) {
+        GoodDetails good = new GoodDetails();
+        InvoiceDetails invoiceDetails = invoiceRepo.getById(invoiceId);
+        good.setInvoice(invoiceDetails);
+        return goodRepo.save(good);
+    }
+
+    @Override
+    public Optional<GoodDetails> fetchGoodById(Integer id) {
+        return goodRepo.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public GoodDetails saveGoods(GoodDetails good) {
+        return goodRepo.save(good);
     }
 
 }

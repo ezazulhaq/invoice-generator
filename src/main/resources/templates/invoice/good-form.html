@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <h3 class="my-3">Add Goods</h3>
+
+        <form th:action="@{/invoice/save-good/{goodId}(goodId=*{id})}" th:object="${good}" method="POST">
+            <input type="hidden" th:value="${invoiceId}" name="invoiceId" />
+            <input type="hidden" th:value="${good.product?.id}" name="productId" />
+            <input type="hidden" th:value="*{id}" name="goodId" />
+
+            <div class="form-group row">
+                <label for="particulars" class="form-control-label col-sm-2">Product Name</label>
+                <div class="col">
+                    <input type="text" th:field="*{product.particulars}" id="particulars" class="form-control"
+                        readonly />
+                </div>
+                <div class="col">
+                    <a class="btn btn-primary" th:href="@{/invoice/product/{goodId}(goodId=*{id})}">GET</a>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label for="hsnCode" class="form-control-label col-sm-2">HSN Code</label>
+                <div class="col">
+                    <input type="text" th:field="*{product.hsnCode}" id="hsnCode" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="rate" class="form-control-label col-sm-2">Rate(Rs./Kg)</label>
+                <div class="col">
+                    <input type="number" th:field="*{product.rate}" id="rate" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="kgs" class="form-control-label col-sm-2">Quantity(Kgs)</label>
+                <div class="col">
+                    <input type="number" th:field="*{kgs}" id="kgs" class="form-control" />
+                </div>
+            </div>
+
+            <div class="my-3">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+
+</body>
+
+</html>

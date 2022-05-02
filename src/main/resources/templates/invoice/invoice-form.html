@@ -7,7 +7,8 @@
     <nav th:replace="layouts/menu :: menu"></nav>
 
     <div class="container">
-        <br>
+        <h2 class="my-3">Invoice Generate</h2>
+
         <form th:action="@{/invoice/save}" th:object="${invoice}" method="POST">
 
             <div class="form-group row">
@@ -35,6 +36,39 @@
                 </div>
             </div>
 
+            <h4 class="my-3">Product Details</h4>
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <th>HSN Code</th>
+                    <th>Particulars</th>
+                    <th>Rate</th>
+                    <th>Kgs</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr th:each="tempGoods : ${goodsList}">
+                        <td th:text="${tempGoods.hsnCode}" />
+                        <td th:text="${tempGoods.particulars}" />
+                        <td th:text="${tempGoods.rate}" />
+                        <td th:text="${tempGoods.kgs}" />
+                        <td th:text="${tempGoods.amount}" />
+                        <td>
+                            <a th:href="@{/product/remove/{id}(id=${tempGoods.id})}"
+                                class="btn btn-danger bi bi-trash"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="form-group row">
+                <label for="total" class="form-control-label col-sm-2">Total</label>
+                <div class="col">
+                    <input type="number" th:field="*{total}" id="total" class="form-control" readonly />
+                </div>
+            </div>
+
             <div class="form-group row">
                 <label for="cgst" class="form-control-label col-sm-2">CGST %</label>
                 <div class="col">
@@ -49,12 +83,23 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label for="grandTotal" class="form-control-label col-sm-2">Grand Total</label>
+                <div class="col">
+                    <input type="number" th:field="*{grandTotal}" id="grandTotal" class="form-control" readonly />
+                </div>
+            </div>
+
             <div class="my-3">
                 <input type="submit" value="Save" class="btn btn-success" />
+                <a class="btn btn-primary" th:href="@{/invoice/addgood/{id}(id=*{invoiceId})}">Add Goods</a>
+                <a class="btn btn-danger" onclick="calculateGrandTotal();">Calculate</a>
             </div>
         </form>
 
     </div>
+
+    <script type="text/javascript" th:src="@{/js/invoice.js}"></script>
 
     <footer th:replace="layouts/footer :: footer"></footer>
     <div th:replace="layouts/default-script :: script"></div>

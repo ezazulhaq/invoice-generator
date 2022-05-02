@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layouts/default-head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="layouts/menu :: menu"></nav>
+
+    <div class="container">
+        <h3 class="my-3">Product Search</h3>
+
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/product/search/searchId}" method="get">
+                    <div class="input-group my-3" style="width: 250px;">
+                        <input type="text" th:name="search" class="form-control mr-1" placeholder="Search Items">
+                        <button type="submit" class="btn btn-secondary bi bi-search"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <th>HSN Code</th>
+                <th>Particulars</th>
+                <th>Rate</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr th:each="tempProduct : ${productList}">
+                    <td th:text="${tempProduct.hsnCode}" />
+                    <td th:text="${tempProduct.particulars}" />
+                    <td th:text="${tempProduct.rate}" />
+                    <td>
+                        <form th:action="@{/invoice/selectProduct/{id}/{goodId}(id=${tempProduct.id},
+                            goodId=${goodId})}" method="post">
+                            <input type="hidden" th:value="${goodId}" name="goodId" />
+                            <button type="submit" class="btn btn-success bi bi-check2-square"></button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer th:replace="layouts/footer :: footer"></footer>
+    <div th:replace="layouts/default-script :: script"></div>
+</body>
+
+</html>

@@ -37,8 +37,28 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     }
 
     @Override
-    public List<GoodDetails> getGoodsListByInvoice(Integer invoiceId) {
+    public List<String> getGoodsListByInvoice(Integer invoiceId) {
         return invoiceDAO.getGoodsListByInvoice(invoiceId);
+    }
+
+    @Override
+    public Optional<GoodDetails> fetchGoodByIdAndInvoice(Integer id, Integer invoiceId) {
+        return invoiceDAO.fetchGoodByIdAndInvoice(id, invoiceId);
+    }
+
+    @Override
+    public GoodDetails addGoodDetails(Integer invoiceId) {
+        return invoiceDAO.addGoodDetails(invoiceId);
+    }
+
+    @Override
+    public Optional<GoodDetails> fetchGoodById(Integer id) {
+        return invoiceDAO.fetchGoodById(id);
+    }
+
+    @Override
+    public GoodDetails saveGoods(GoodDetails good) {
+        return invoiceDAO.saveGoods(good);
     }
 
 }

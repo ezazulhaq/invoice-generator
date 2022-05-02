@@ -45,16 +45,16 @@
             <tbody>
                 <tr th:each="tempInvoice : ${invoiceList}">
                     <td th:text="${tempInvoice.invoiceId}" />
-                    <td th:text="${tempInvoice.customer}" />
-                    <td th:text="${tempInvoice.customer}" />
+                    <td th:each="tempCustomer: ${tempInvoice.customer}" th:text="${tempCustomer.gstNo}" />
+                    <td th:each="tempCustomer: ${tempInvoice.customer}" th:text="${tempCustomer.customerName}" />
                     <td th:text="${tempInvoice.grandTotal}" />
                     <td th:text="${tempInvoice.invoiceDate}" />
                     <td>
                         <a th:href="@{/invoice/update/{id}(id=${tempInvoice.invoiceId})}"
-                            class="btn btn-success">Update</a>
+                            class="btn btn-success bi bi-pencil-square"></a>
                         <a sec:authorize="hasRole('MANAGER')"
                             th:href="@{/invoice/remove/{id}(id=${tempInvoice.invoiceId})}"
-                            class="btn btn-danger">Delete</a>
+                            class="btn btn-danger bi bi-trash"></a>
                     </td>
                 </tr>
             </tbody>

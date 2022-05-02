@@ -22,12 +22,9 @@ public class InvoiceDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_invoice")
     private Integer invoiceId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private CustomerDetails customer;
-
-    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
-    private List<GoodDetails> goods;
 
     private Date invoiceDate;
 
@@ -40,6 +37,9 @@ public class InvoiceDetails {
     private Double grandTotal;
 
     private String amountInWords;
+
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
+    private List<GoodDetails> goods;
 
     public Integer getInvoiceId() {
         return invoiceId;

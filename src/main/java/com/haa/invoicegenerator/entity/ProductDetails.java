@@ -1,9 +1,13 @@
 package com.haa.invoicegenerator.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +29,10 @@ public class ProductDetails {
     @NotNull(message = "Please enter Rate")
     @NumberFormat(style = NumberFormat.Style.CURRENCY)
     private Double rate;
+
+    @OneToMany(mappedBy = "product", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH })
+    private List<GoodDetails> good;
 
     public ProductDetails() {
     }
@@ -68,6 +76,14 @@ public class ProductDetails {
 
     public void setRate(Double rate) {
         this.rate = rate;
+    }
+
+    public List<GoodDetails> getGood() {
+        return good;
+    }
+
+    public void setGood(List<GoodDetails> good) {
+        this.good = good;
     }
 
     @Override

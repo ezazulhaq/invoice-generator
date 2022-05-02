@@ -16,6 +16,14 @@ public interface InvoiceDetailsDAO {
 
     Optional<InvoiceDetails> fetchInvoiceById(Integer invoiceId);
 
-    List<GoodDetails> getGoodsListByInvoice(Integer invoiceId);
+    List<String> getGoodsListByInvoice(Integer invoiceId);
+
+    Optional<GoodDetails> fetchGoodByIdAndInvoice(Integer id, Integer invoiceId);
+
+    GoodDetails addGoodDetails(Integer invoiceId);
+
+    Optional<GoodDetails> fetchGoodById(Integer id);
+
+    GoodDetails saveGoods(GoodDetails good);
 
 }
