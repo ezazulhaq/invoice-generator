@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice Generator</title>
+</head>
+
+<body>
+
+    <div>
+        <table>
+            <tr>
+                <td>Invoice No: <span th:text="${invoice.invoiceId}"></span></td>
+                <td>
+                    <h3><strong>Tax Invoice</strong></h3>
+                </td>
+                <td text-align="right">Cell: 9849953900</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <h4>CASH / CREDIT BILL</h4>
+                </td>
+                <td text-align="right">Phone Pay No: 9014578301</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <h1><strong>HAA ENTERPRISES</strong></h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Distributor of Precured Rubber, Hot rubber &amp; Vulcanising Material</td>
+                        </tr>
+                        <tr>
+                            <td># 54-6-4, Block No. 8, Plot No. 125, 126. Shop No. 2 &amp; 3,</td>
+                        </tr>
+                        <tr>
+                            <td>Five Star Complex, 4th Road, Autonagar, VIJAYAWADA - 520 007.</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>GSTIN</td>
+                            <td>:</td>
+                            <td>37AGHPA7571K1Z4</td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td>:</td>
+                            <td>Andhra Pradesh</td>
+                        </tr>
+                        <tr>
+                            <td>Code</td>
+                            <td>:</td>
+                            <td>37</td>
+                        </tr>
+                        <tr>
+                            <td>Date</td>
+                            <td>:</td>
+                            <td th:text="${invoice.invoiceDate}"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>To M/s</td>
+                            <td th:text="${customer.customerName}"></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td th:text="${customer.address}"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Ph</td>
+                            <td th:text="${customer.phoneNumber}"></td>
+                        </tr>
+                        <tr>
+                            <td>GST No.</td>
+                            <td th:text="${customer.gstNo}"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Name and Address for Delivery</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>............................</td>
+                        </tr>
+                        <tr>
+                            <td>Place of Supply</td>
+                            <td>............................</td>
+                        </tr>
+                        <tr>
+                            <td>Ph</td>
+                            <td>............................</td>
+                        </tr>
+                        <tr>
+                            <td>GST No.</td>
+                            <td>............................</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Particulars</th>
+                    <th>HSN Code</th>
+                    <th>Qty</th>
+                    <th>Kgs</th>
+                    <th>Rate</th>
+                    <th>Amount(Rs.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="good : ${goodsList}">
+                    <td th:text="${good.particulars}"></td>
+                    <td th:text="${good.hsnCode}"></td>
+                    <td></td>
+                    <td th:text="${good.kgs}"></td>
+                    <td th:text="${good.rate}"></td>
+                    <td th:text="${good.amount}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Rupees In Words</td>
+                            <td th:text="${invoice.amountInWords}"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Total Value of Goods:</td>
+                            <td th:text="${invoice.total}"></td>
+                        </tr>
+                        <tr>
+                            <td>Add. Freight %:</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Bank Name:</td>
+                            <td>INDIAN BANK</td>
+                        </tr>
+                        <tr>
+                            <td>Bank Acc Number:</td>
+                            <td>6304099423</td>
+                        </tr>
+                        <tr>
+                            <td>Bank IFSC:</td>
+                            <td>IDIB000K210</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Taxable Value:</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Add. CGST <span th:text="${invoice.cgst}"></span>%:</td>
+                            <td th:text="${invoice.total*invoice.cgst/100}"></td>
+                        </tr>
+                        <tr>
+                            <td>Add. SGST <span th:text="${invoice.sgst}"></span>%:</td>
+                            <td th:text="${invoice.total*invoice.sgst/100}"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Bank Name:</td>
+                            <td>Axis BANK</td>
+                        </tr>
+                        <tr>
+                            <td>Bank Acc Number:</td>
+                            <td>916020028257682</td>
+                        </tr>
+                        <tr>
+                            <td>Bank IFSC:</td>
+                            <td>UTIB0001899</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Add. IGST %:</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Grand Total:</td>
+                            <td th:text="${invoice.grandTotal}"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>TERMS &amp; CONDITIONS</td>
+                        </tr>
+                        <tr>
+                            <td>1. Goods once sold willnot be taken back or exchanged</td>
+                        </tr>
+                        <tr>
+                            <td>2. All disputes are subject to Vijayawada Jurisdiction only.</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                For <h4>HAA ENTERPRISES</h4>
+                            </td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            <td>Authorised Signature</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
