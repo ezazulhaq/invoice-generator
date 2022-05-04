@@ -200,6 +200,19 @@ public class InvoiceController {
         return "redirect:/invoice/update/" + goodData.getInvoice().getInvoiceId();
     }
 
+    @GetMapping("/product/remove/{id}")
+    public String removeGoodsFromInvoice(@PathVariable("id") String goodId, Model theModel) {
+        Optional<GoodDetails> goodDetails = invoiceService.fetchGoodById(Integer.parseInt(goodId));
+        GoodDetails good = new GoodDetails();
+
+        if (goodDetails.isPresent()) {
+            good = goodDetails.get();
+            invoiceService.removeGoodsFromInvoice(Integer.parseInt(goodId));
+        }
+
+        return "redirect:/invoice/update/" + good.getInvoice().getInvoiceId();
+    }
+
     @GetMapping(value = "/download-pdf/{id}")
     public void downloadPDFResource(@PathVariable("id") String invoiceId, HttpServletResponse response) {
         try {

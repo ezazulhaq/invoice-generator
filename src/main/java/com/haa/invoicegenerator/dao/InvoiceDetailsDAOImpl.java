@@ -74,4 +74,10 @@ public class InvoiceDetailsDAOImpl implements InvoiceDetailsDAO {
         return goodRepo.save(good);
     }
 
+    @Override
+    @Transactional
+    public void removeGoodsFromInvoice(Integer goodId) {
+        goodRepo.deleteById(goodId);
+    }
+
 }

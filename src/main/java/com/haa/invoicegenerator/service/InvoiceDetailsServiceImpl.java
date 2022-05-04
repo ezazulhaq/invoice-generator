@@ -61,4 +61,9 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
         return invoiceDAO.saveGoods(good);
     }
 
+    @Override
+    public void removeGoodsFromInvoice(Integer goodId) {
+        invoiceDAO.removeGoodsFromInvoice(goodId);
+    }
+
 }

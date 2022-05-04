@@ -26,4 +26,6 @@ public interface InvoiceDetailsDAO {
 
     GoodDetails saveGoods(GoodDetails good);
 
+    void removeGoodsFromInvoice(Integer goodId);
+
 }

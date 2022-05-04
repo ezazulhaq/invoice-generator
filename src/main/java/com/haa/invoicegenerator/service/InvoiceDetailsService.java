@@ -26,4 +26,6 @@ public interface InvoiceDetailsService {
 
     GoodDetails saveGoods(GoodDetails good);
 
+    void removeGoodsFromInvoice(Integer goodId);
+
 }
