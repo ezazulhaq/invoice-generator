@@ -11,9 +11,9 @@ services:
       MYSQL_USER: hbinvoice
       MYSQL_PASSWORD: hbinvoice
       MYSQL_DATABASE: hb_invoice_db
-      MYSQL_ROOT_HOST: '%'
     ports:
       - 3394:3306
+    mem_limit: 512m
     volumes:
       - mysql-invoice-mvc:/var/lib/mysql
 
@@ -25,6 +25,19 @@ services:
     restart: always
     ports:
       - 8114:8080
+    mem_limit: 512m
+
+  web:
+    container_name: invoice_web
+    depends_on:
+      - db
+    image: ezazulhaq02/haa-enterprises:invoice_generator_1.0
+    restart: always
+    environment:
+      spring_datasource_url: jdbc:mysql://invoice_db/hb_invoice_db
+    ports:
+      - 8105:8104
+    mem_limit: 1024m
 
 volumes:
   mysql-invoice-mvc:
