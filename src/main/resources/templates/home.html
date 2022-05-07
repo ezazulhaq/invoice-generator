@@ -27,30 +27,30 @@
 
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
-                <th class="col col-sm-2">
+                <th class="col-2">
                     Invoice ID
                 </th>
-                <th class="col col-sm-2">
+                <th class="col-4">
                     GST No
                 </th>
-                <th class="col col-sm-2">
+                <th class="col-4">
                     Customer Name
                 </th>
-                <th class="col col-sm-2">
+                <!-- <th class="col">
                     Bill Amount
                 </th>
-                <th class="col col-sm-2">
+                <th class="col">
                     Date
-                </th>
-                <th class="col">Action</th>
+                </th> -->
+                <th class="col-2">Action</th>
             </thead>
             <tbody>
                 <tr th:each="tempInvoice : ${invoiceList}">
                     <td th:text="${tempInvoice.invoiceId}" />
                     <td th:text="${tempInvoice.customer?.gstNo}" />
                     <td th:text="${tempInvoice.customer?.customerName}" />
-                    <td th:text="${tempInvoice.grandTotal}" />
-                    <td th:text="${tempInvoice.invoiceDate}" />
+                    <!-- <td th:text="${tempInvoice.grandTotal}" />
+                    <td th:text="${tempInvoice.invoiceDate}" /> -->
                     <td>
                         <a th:href="@{/invoice/update/{id}(id=${tempInvoice.invoiceId})}"
                             class="btn btn-success bi bi-pencil-square"></a>
